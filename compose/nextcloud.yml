@@ -1,0 +1,12 @@
+version: '2'
+services:
+  nextcloud:
+    container_name: nextcloud
+    image: alexphillips/nextcloud
+    networks:
+      - link
+    volumes:
+      - ${DOCKER_HOME}/nextcloud/volumes/data:/data
+      - ${DOCKER_HOME}/nextcloud/volumes/config:/var/www/nextcloud/config
+networks:
+  link:

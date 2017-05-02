@@ -1,0 +1,15 @@
+version: '2'
+services:
+  tpb:
+    container_name: tpb
+    image: linuxserver/transmission
+    network_mode: container:openvpn
+    volumes:
+      - ${DOCKER_HOME}/transmission/tpb/config:/config
+      - ${DOCKER_HOME}/transmission/tpb/downloads:/downloads
+      - ${DOCKER_HOME}/transmission/tpb/watch:/watch
+      - /Volumes/Drobo:/Volumes/Drobo
+    environment:
+      - PGID=${PGID}
+      - PUID=${PUID}
+      - TZ=${TIMEZONE}

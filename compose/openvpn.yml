@@ -1,0 +1,16 @@
+version: '2'
+services:
+  openvpn:
+    container_name: openvpn
+    image: chuckremes/openvpn-client
+    privileged: true
+    networks:
+      - link
+    environment:
+      - OPENVPN_PROVIDER=PIA
+      - OPENVPN_CONFIG="US New York"
+      - OPENVPN_USERNAME=${OPENVPN_USER}
+      - OPENVPN_PASSWORD=${OPENVPN_PASS}
+      - LOCAL_NETWORK=192.168.1.0/24
+networks:
+  link:

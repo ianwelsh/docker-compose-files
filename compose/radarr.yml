@@ -1,0 +1,15 @@
+version: '2'
+services:
+  radarr:
+    container_name: radarr
+    image: linuxserver/radarr
+    network_mode: container:openvpn
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ${DOCKER_HOME}/radarr:/config
+      - ${DOCKER_HOME}/transmission/tpb/downloads:/downloads
+      - ${DOCKER_HOME}/plex/media/Movies:/movies
+    environment:
+      - PGID=${PGID}
+      - PUID=${PUID}
+      - TZ=${TIMEZONE}

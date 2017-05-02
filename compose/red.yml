@@ -1,0 +1,15 @@
+version: '2'
+services:
+  red:
+    container_name: red
+    image: linuxserver/transmission
+    network_mode: container:openvpn
+    volumes:
+      - ${DOCKER_HOME}/transmission/red/config:/config
+      - ${DOCKER_HOME}/transmission/red/downloads:/downloads
+      - ${DOCKER_HOME}/transmission/red/watch:/watch
+      - /Volumes/Drobo:/Volumes/Drobo
+    environment:
+      - PGID=${PGID}
+      - PUID=${PUID}
+      - TZ=${TIMEZONE}

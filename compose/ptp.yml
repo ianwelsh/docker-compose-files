@@ -1,0 +1,15 @@
+version: '2'
+services:
+  ptp:
+    container_name: ptp
+    image: linuxserver/transmission
+    network_mode: container:openvpn
+    volumes:
+      - ${DOCKER_HOME}/transmission/ptp/config:/config
+      - ${DOCKER_HOME}/transmission/ptp/downloads:/downloads
+      - ${DOCKER_HOME}/transmission/ptp/watch:/watch
+      - /Volumes/Drobo:/Volumes/Drobo
+    environment:
+      - PGID=${PGID}
+      - PUID=${PUID}
+      - TZ=${TIMEZONE}

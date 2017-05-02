@@ -1,0 +1,15 @@
+version: '2'
+services:
+  jackett:
+    container_name: jackett
+    image: linuxserver/jackett
+    network_mode: container:openvpn
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ${DOCKER_HOME}/jackett/config:/config
+      - ${DOCKER_HOME}/jackett/downloads:/downloads
+      - ${DOCKER_HOME}/plex/media/TV Shows:/tv
+    environment:
+      - PGID=${PGID}
+      - PUID=${PUID}
+      - TZ=${TIMEZONE}
