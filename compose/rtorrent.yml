@@ -1,0 +1,15 @@
+version: '2'
+services:
+  rtorrent:
+    container_name: rtorrent
+    image: linuxserver/rutorrent
+    network_mode: container:openvpn
+    volumes:
+      - ${DOCKER_HOME}/rtorrent/config:/config
+      - ${DOCKER_HOME}/rtorrent/run:/run
+      - ${DOCKER_HOME}/rtorrent/downloads:/downloads
+      - /Volumes/Drobo:/Volumes/Drobo
+    environment:
+      - PGID=${PGID}
+      - PUID=${PUID}
+      - TZ=${TIMEZONE}
