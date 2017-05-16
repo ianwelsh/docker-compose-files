@@ -7,7 +7,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ${DOCKER_HOME}/radarr:/config
-      - ${DOCKER_HOME}/transmission/tpb/downloads:/downloads
+      - ${DOCKER_HOME}/rtorrent/downloads:/downloads
       - ${DOCKER_HOME}/plex/media/Movies:/movies
     environment:
       - PGID=${PGID}
