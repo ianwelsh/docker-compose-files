@@ -1,0 +1,18 @@
+version: '2'
+services:
+  duplicati:
+    container_name: duplicati
+    image: linuxserver/duplicati
+    networks:
+      - link
+    environment:
+      - PGID=${PGID}
+      - PUID=${PUID}
+      - TZ=${TIMEZONE}
+    volumes:
+      - ${DOCKER_HOME}/duplicati/config:/config
+      - ${DOCKER_HOME}/duplicati/backups:/backups
+      - ${HOME}:/source
+      - ${NAS}:${NAS}:ro
+networks:
+  link:

@@ -4,7 +4,6 @@ services:
     container_name: plex
     image: plexinc/pms-docker:plexpass
     privileged: true
-    hostname: squirtle
     ports:
       - 32400:32400/tcp
       - 3005:3005/tcp
@@ -17,11 +16,38 @@ services:
       - 32414:32414/udp
     environment:
       - TZ=${TIMEZONE}
-      - ADVERTISE_IP=http://192.168.1.151:32400/
+      - ADVERTISE_IP=http://192.168.1.151:32400,https://plex.wootables.com:443
     networks:
       - link
     volumes:
       - ${DOCKER_HOME}/plex/config:/config
       - ${DOCKER_HOME}/plex/media:/data
+
+  plexpy:
+    container_name: plexpy
+    image: linuxserver/plexpy
+    environment:
+      - PGID=${PGID}
+      - PUID=${PUID}
+      - TZ=${TIMEZONE}
+    networks:
+      - link
+    volumes:
+      - ${DOCKER_HOME}/plexpy:/config
+      - ${DOCKER_HOME}/plex/config/Library/Application\ Support/Plex\ Media\ Server/Logs:/logs:ro
+
+  ombi:
+    container_name: ombi
+    image: linuxserver/ombi
+    environment:
+      - PGID=${PGID}
+      - PUID=${PUID}
+      - TZ=${TIMEZONE}
+    networks:
+      - link
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ${DOCKER_HOME}/ombi:/config
+
 networks:
   link:

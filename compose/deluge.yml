@@ -1,0 +1,14 @@
+version: '2'
+services:
+  deluge-tpb:
+    container_name: deluge-tpb
+    image: linuxserver/deluge
+    network_mode: container:openvpn
+    volumes:
+      - ${DOCKER_HOME}/deluge/tpb/config:/config
+      - ${DOCKER_HOME}/deluge/tpb/downloads:/downloads
+      - ${NAS}:${NAS}
+    environment:
+      - PGID=${PGID}
+      - PUID=${PUID}
+      - TZ=${TIMEZONE}

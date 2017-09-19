@@ -1,0 +1,18 @@
+version: '2'
+services:
+  photoshow:
+    container_name: photoshow
+    image: linuxserver/photoshow
+    networks:
+      - link
+    environment:
+      - PGID=${PGID}
+      - PUID=${PUID}
+      - TZ=${TIMEZONE}
+    volumes:
+      - ${DOCKER_HOME}/photoshow/config:/config
+      - ${DOCKER_HOME}/photoshow/pictures:/Pictures:ro
+      - ${DOCKER_HOME}/photoshow/thumbs:/Thumbs
+      - ${NAS}:${NAS}:ro
+networks:
+  link:

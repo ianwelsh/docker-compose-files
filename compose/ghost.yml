@@ -1,0 +1,11 @@
+version: '2'
+services:
+  ghost:
+    container_name: ghost
+    image: ghost
+    networks:
+      - link
+    volumes:
+      - ${DOCKER_HOME}/ghost:/var/lib/ghost
+networks:
+  link:

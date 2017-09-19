@@ -1,0 +1,17 @@
+version: '2'
+services:
+  homeassistant:
+    container_name: homeassistant
+    image: homeassistant/home-assistant
+    networks:
+      - link
+    ports:
+      - 8123:8123
+    volumes:
+      - ${DOCKER_HOME}/home-assistant:/config
+      - /etc/localtime:/etc/localtime:ro
+    devices:
+      - /dev/ttyUSB0:/dev/ttyUSB0
+
+networks:
+  link:

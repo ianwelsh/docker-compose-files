@@ -2,11 +2,15 @@ version: '2'
 services:
   nextcloud:
     container_name: nextcloud
-    image: alexphillips/nextcloud
+    image: linuxserver/nextcloud
     networks:
       - link
+    environment:
+      - PGID=${PGID}
+      - PUID=${PUID}
+      - TZ=${TIMEZONE}
     volumes:
-      - ${DOCKER_HOME}/nextcloud/volumes/data:/data
-      - ${DOCKER_HOME}/nextcloud/volumes/config:/var/www/nextcloud/config
+      - ${DOCKER_HOME}/nextcloud/data:/data
+      - ${DOCKER_HOME}/nextcloud/config:/config/www/nextcloud
 networks:
   link:

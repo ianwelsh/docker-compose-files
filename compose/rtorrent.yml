@@ -1,15 +1,119 @@
 version: '2'
 services:
-  rtorrent:
-    container_name: rtorrent
+  rtorrent-apl:
+    container_name: rtorrent-apl
     image: linuxserver/rutorrent
+    tty: true
     network_mode: container:openvpn
     volumes:
-      - ${DOCKER_HOME}/rtorrent/config:/config
-      - ${DOCKER_HOME}/rtorrent/run:/run
-      - ${DOCKER_HOME}/rtorrent/downloads:/downloads
-      - /Volumes/Drobo:/Volumes/Drobo
+      - ${DOCKER_HOME}/rtorrent/apl/config:/config
+      - ${DOCKER_HOME}/rtorrent/apl/downloads:/downloads
+      - ${DOCKER_HOME}/rtorrent/apl/watch:/watch
+      - ${NAS}:${NAS}
     environment:
       - PGID=${PGID}
       - PUID=${PUID}
       - TZ=${TIMEZONE}
+
+  rtorrent-ggn:
+    container_name: rtorrent-ggn
+    image: linuxserver/rutorrent
+    network_mode: container:openvpn
+    volumes:
+      - ${DOCKER_HOME}/rtorrent/ggn/config:/config
+      - ${DOCKER_HOME}/rtorrent/ggn/downloads:/downloads
+      - ${DOCKER_HOME}/rtorrent/ggn/watch:/watch
+      - ${NAS}:${NAS}
+    environment:
+      - PGID=${PGID}
+      - PUID=${PUID}
+      - TZ=${TIMEZONE}
+
+  rtorrent-nwcd:
+    container_name: rtorrent-nwcd
+    image: linuxserver/rutorrent
+    network_mode: container:openvpn
+    volumes:
+      - ${DOCKER_HOME}/rtorrent/nwcd/config:/config
+      - ${DOCKER_HOME}/rtorrent/nwcd/downloads:/downloads
+      - ${DOCKER_HOME}/rtorrent/nwcd/watch:/watch
+      - ${NAS}:${NAS}
+    environment:
+      - PGID=${PGID}
+      - PUID=${PUID}
+      - TZ=${TIMEZONE}
+
+  rtorrent-ptp:
+    container_name: rtorrent-ptp
+    image: linuxserver/rutorrent
+    network_mode: container:openvpn
+    volumes:
+      - ${DOCKER_HOME}/rtorrent/ptp/config:/config
+      - ${DOCKER_HOME}/rtorrent/ptp/downloads:/downloads
+      - ${DOCKER_HOME}/rtorrent/ptp/watch:/watch
+      - ${NAS}:${NAS}
+    environment:
+      - PGID=${PGID}
+      - PUID=${PUID}
+      - TZ=${TIMEZONE}
+
+  rtorrent-red:
+    container_name: rtorrent-red
+    image: linuxserver/rutorrent
+    network_mode: container:openvpn
+    volumes:
+      - ${DOCKER_HOME}/rtorrent/red/config:/config
+      - ${DOCKER_HOME}/rtorrent/red/downloads:/downloads
+      - ${DOCKER_HOME}/rtorrent/red/watch:/watch
+      - ${NAS}:${NAS}
+    environment:
+      - PGID=${PGID}
+      - PUID=${PUID}
+      - TZ=${TIMEZONE}
+
+  rtorrent-btn:
+    container_name: rtorrent-btn
+    image: linuxserver/rutorrent
+    network_mode: container:openvpn
+    volumes:
+      - ${DOCKER_HOME}/rtorrent/btn/config:/config
+      - ${DOCKER_HOME}/rtorrent/btn/downloads:/downloads
+      - ${DOCKER_HOME}/rtorrent/btn/watch:/watch
+      - ${NAS}:${NAS}
+    environment:
+      - PGID=${PGID}
+      - PUID=${PUID}
+      - TZ=${TIMEZONE}
+
+  rtorrent-tpb:
+    container_name: rtorrent-tpb
+    image: linuxserver/rutorrent
+    network_mode: container:openvpn
+    volumes:
+      - ${DOCKER_HOME}/rtorrent/tpb/config:/config
+      - ${DOCKER_HOME}/rtorrent/tpb/downloads:/downloads
+      - ${DOCKER_HOME}/rtorrent/tpb/watch:/watch
+      - ${NAS}:${NAS}
+    environment:
+      - PGID=${PGID}
+      - PUID=${PUID}
+      - TZ=${TIMEZONE}
+
+  rtorrent-mam:
+    container_name: rtorrent-mam
+    image: linuxserver/rutorrent
+    networks:
+      - link
+    ports:
+      - 32120:32120
+    volumes:
+      - ${DOCKER_HOME}/rtorrent/mam/config:/config
+      - ${DOCKER_HOME}/rtorrent/mam/downloads:/downloads
+      - ${DOCKER_HOME}/rtorrent/mam/watch:/watch
+      - ${NAS}:${NAS}
+    environment:
+      - PGID=${PGID}
+      - PUID=${PUID}
+      - TZ=${TIMEZONE}
+networks:
+  link:

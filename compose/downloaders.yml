@@ -1,0 +1,70 @@
+version: '2'
+services:
+  jackett:
+    container_name: jackett
+    image: linuxserver/jackett
+    network_mode: container:openvpn
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ${DOCKER_HOME}/jackett/config:/config
+      - ${DOCKER_HOME}/jackett/downloads:/downloads
+      - ${DOCKER_HOME}/plex/media/TV Shows:/tv
+    environment:
+      - PGID=${PGID}
+      - PUID=${PUID}
+      - TZ=${TIMEZONE}
+
+  cardigann:
+    container_name: cardigann
+    image: linuxserver/cardigann
+    network_mode: container:openvpn
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ${DOCKER_HOME}/cardigann:/config
+    environment:
+      - PGID=${PGID}
+      - PUID=${PUID}
+      - TZ=${TIMEZONE}
+
+  sonarr:
+    container_name: sonarr
+    image: linuxserver/sonarr
+    network_mode: container:openvpn
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ${DOCKER_HOME}/sonarr:/config
+      - ${DOCKER_HOME}/deluge/tpb/downloads:/downloads
+      - ${DOCKER_HOME}/plex/media/TV Shows:/tv
+    environment:
+      - PGID=${PGID}
+      - PUID=${PUID}
+      - TZ=${TIMEZONE}
+
+  radarr:
+    container_name: radarr
+    image: linuxserver/radarr
+    network_mode: container:openvpn
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ${DOCKER_HOME}/radarr:/config
+      - ${DOCKER_HOME}/deluge/tpb/downloads:/downloads
+      - ${DOCKER_HOME}/plex/media/Movies:/movies
+    environment:
+      - PGID=${PGID}
+      - PUID=${PUID}
+      - TZ=${TIMEZONE}
+
+  headphones:
+    container_name: headphones
+    image: linuxserver/headphones
+    network_mode: container:openvpn
+    volumes:
+      - ${DOCKER_HOME}/headphones/config:/config
+      - ${DOCKER_HOME}/headphones/music:/music
+    environment:
+      - PGID=${PGID}
+      - PUID=${PUID}
+      - TZ=${TIMEZONE}
+
+networks:
+  link:

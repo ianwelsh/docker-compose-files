@@ -4,16 +4,13 @@ services:
     container_name: proxy
     image: proxy
     ports:
-      - "80:80"
-      - "443:443"
-      - "8081-8089:8081-8089"
-      - "9091-9099:9091-9099"
-      # - 9117:9117 # Jackett
-      # - 8989:8989 # Sonarr
-      # - 7878:7878 # Radarr
+      - 80:80
+      - 443:443
     networks:
       - link
     volumes:
       - ${DOCKER_HOME}/proxy/sites-enabled:/etc/nginx/sites-enabled
+      - ${DOCKER_HOME}/proxy/content:/var/www/html
+      - ${NAS}:${NAS}:ro
 networks:
   link:

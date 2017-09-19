@@ -1,0 +1,17 @@
+version: '2'
+services:
+  beets:
+    container_name: beets
+    image: linuxserver/beets
+    networks:
+      - link
+    volumes:
+      - ${DOCKER_HOME}/beets/config:/config
+      - ${DOCKER_HOME}/beets/downloads:/downloads
+      - ${NAS}:${NAS}
+    environment:
+      - PGID=${PGID}
+      - PUID=${PUID}
+      - TZ=${TIMEZONE}
+networks:
+  link:
