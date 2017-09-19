@@ -3,7 +3,7 @@ services:
   jackett:
     container_name: jackett
     image: linuxserver/jackett
-    network_mode: container:openvpn
+    network_mode: service:openvpn
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ${DOCKER_HOME}/jackett/config:/config
@@ -13,23 +13,13 @@ services:
       - PGID=${PGID}
       - PUID=${PUID}
       - TZ=${TIMEZONE}
-
-  cardigann:
-    container_name: cardigann
-    image: linuxserver/cardigann
-    network_mode: container:openvpn
-    volumes:
-      - /etc/localtime:/etc/localtime:ro
-      - ${DOCKER_HOME}/cardigann:/config
-    environment:
-      - PGID=${PGID}
-      - PUID=${PUID}
-      - TZ=${TIMEZONE}
+    depends_on:
+      - openvpn
 
   sonarr:
     container_name: sonarr
     image: linuxserver/sonarr
-    network_mode: container:openvpn
+    network_mode: service:openvpn
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ${DOCKER_HOME}/sonarr:/config
@@ -39,11 +29,13 @@ services:
       - PGID=${PGID}
       - PUID=${PUID}
       - TZ=${TIMEZONE}
+    depends_on:
+      - openvpn
 
   radarr:
     container_name: radarr
     image: linuxserver/radarr
-    network_mode: container:openvpn
+    network_mode: service:openvpn
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ${DOCKER_HOME}/radarr:/config
@@ -53,18 +45,5 @@ services:
       - PGID=${PGID}
       - PUID=${PUID}
       - TZ=${TIMEZONE}
-
-  headphones:
-    container_name: headphones
-    image: linuxserver/headphones
-    network_mode: container:openvpn
-    volumes:
-      - ${DOCKER_HOME}/headphones/config:/config
-      - ${DOCKER_HOME}/headphones/music:/music
-    environment:
-      - PGID=${PGID}
-      - PUID=${PUID}
-      - TZ=${TIMEZONE}
-
-networks:
-  link:
+    depends_on:
+      - openvpn

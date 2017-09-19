@@ -3,8 +3,6 @@ services:
   homeassistant:
     container_name: homeassistant
     image: homeassistant/home-assistant
-    networks:
-      - link
     ports:
       - 8123:8123
     volumes:
@@ -12,6 +10,3 @@ services:
       - /etc/localtime:/etc/localtime:ro
     devices:
       - /dev/ttyUSB0:/dev/ttyUSB0
-
-networks:
-  link:

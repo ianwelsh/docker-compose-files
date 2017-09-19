@@ -16,9 +16,7 @@ services:
       - 32414:32414/udp
     environment:
       - TZ=${TIMEZONE}
-      - ADVERTISE_IP=http://192.168.1.151:32400,https://plex.wootables.com:443
-    networks:
-      - link
+      - ADVERTISE_IP=http://${PLEX_LOCAL_IP}:32400,https://${PLEX_BASE_URL}:443
     volumes:
       - ${DOCKER_HOME}/plex/config:/config
       - ${DOCKER_HOME}/plex/media:/data
@@ -30,8 +28,6 @@ services:
       - PGID=${PGID}
       - PUID=${PUID}
       - TZ=${TIMEZONE}
-    networks:
-      - link
     volumes:
       - ${DOCKER_HOME}/plexpy:/config
       - ${DOCKER_HOME}/plex/config/Library/Application\ Support/Plex\ Media\ Server/Logs:/logs:ro
@@ -43,11 +39,6 @@ services:
       - PGID=${PGID}
       - PUID=${PUID}
       - TZ=${TIMEZONE}
-    networks:
-      - link
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ${DOCKER_HOME}/ombi:/config
-
-networks:
-  link:

@@ -6,11 +6,17 @@ services:
     ports:
       - 80:80
       - 443:443
-    networks:
-      - link
     volumes:
       - ${DOCKER_HOME}/proxy/sites-enabled:/etc/nginx/sites-enabled
       - ${DOCKER_HOME}/proxy/content:/var/www/html
       - ${NAS}:${NAS}:ro
-networks:
-  link:
+    depends_on:
+      - openvpn
+      - duplicati
+      - ghost
+      - homeassistant
+      - grafana
+      - chronograf
+      - nextcloud
+      - photoshow
+      - plex

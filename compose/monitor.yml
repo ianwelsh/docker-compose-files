@@ -3,28 +3,9 @@ services:
   grafana:
     container_name: grafana
     image: grafana/grafana
-    networks:
-      - link
     volumes:
       - ${DOCKER_HOME}/grafana/data:/var/lib/grafana
       - ${DOCKER_HOME}/grafana/config:/etc/grafana
-
-  # prometheus:
-  #   image: prom/prometheus
-  #   container_name: prometheus
-  #   volumes:
-  #     - ${DOCKER_HOME}/prometheus/config:/etc/prometheus/
-  #     - ${DOCKER_HOME}/prometheus/data:/prometheus
-  #   command:
-  #     - '-config.file=/etc/prometheus/prometheus.yml'
-  #     - '-storage.local.path=/prometheus'
-  #     - '-alertmanager.url=http://alertmanager:9093'
-  #     - '-storage.local.memory-chunks=100000'
-  #   restart: unless-stopped
-  #   networks:
-  #     - link
-  #   labels:
-  #     org.label-schema.group: "monitoring"
 
   cadvisor:
     image: google/cadvisor
@@ -36,16 +17,12 @@ services:
       - /sys:/sys:ro
       - /var/lib/docker/:/var/lib/docker:ro
     restart: unless-stopped
-    networks:
-      - link
     labels:
       org.label-schema.group: "monitoring"
 
   influxdb:
     container_name: influxdb
     image: influxdb
-    networks:
-      - link
     volumes:
       - ${DOCKER_HOME}/influxdb:/var/lib/influxdb
     ports:
@@ -55,19 +32,12 @@ services:
   chronograf:
     container_name: chronograf
     image: chronograf
-    networks:
-      - link
     volumes:
       - ${DOCKER_HOME}/chronograf:/var/lib/chronograf
 
   kapacitor:
     container_name: kapacitor
     image: kapacitor
-    networks:
-      - link
     volumes:
       - ${DOCKER_HOME}/kapacitor/data:/var/lib/kapacitor
       - ${DOCKER_HOME}/kapacitor/config/kapacitor.conf:/etc/kapacitor/kapacitor.conf:ro
-
-networks:
-  link:

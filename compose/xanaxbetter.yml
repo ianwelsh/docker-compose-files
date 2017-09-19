@@ -1,14 +1,14 @@
-version: '2'
-services:
-  xanaxbetter:
-    container_name: xanaxbetter
-    image: xanaxbetter
-    volumes:
-      - ${DOCKER_HOME}/xanaxbetter:/config
-      - /Volumes/Drobo/Seeds/apollo:/data
-      - ${DOCKER_HOME}/rtorrent/downloads/watch/apollo:/torrents
-    environment:
-      - USERNAME=${APOLLO_USERNAME}
-      - PASSWORD=${APOLLO_PASSWORD}
-      - PIECE_LENGTH=18
-      - RELEASE_URL=
+# version: '2'
+# services:
+#   xanaxbetter:
+#     container_name: xanaxbetter
+#     image: xanaxbetter
+#     volumes:
+#       - ${DOCKER_HOME}/xanaxbetter:/config
+#       - /Volumes/Drobo/Seeds/apollo:/data
+#       - ${DOCKER_HOME}/rtorrent/downloads/watch/apollo:/torrents
+#     environment:
+#       - USERNAME=${APOLLO_USERNAME}
+#       - PASSWORD=${APOLLO_PASSWORD}
+#       - PIECE_LENGTH=18
+#       - RELEASE_URL=

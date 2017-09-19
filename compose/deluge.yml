@@ -3,7 +3,9 @@ services:
   deluge-tpb:
     container_name: deluge-tpb
     image: linuxserver/deluge
-    network_mode: container:openvpn
+    depends_on:
+      - openvpn
+    network_mode: service:openvpn
     volumes:
       - ${DOCKER_HOME}/deluge/tpb/config:/config
       - ${DOCKER_HOME}/deluge/tpb/downloads:/downloads
