@@ -1,7 +1,7 @@
 FROM phusion/baseimage:latest
 
 # Use baseimage-docker's init system.
-CMD ["/sbin/my_init"]
+# CMD ["/sbin/my_init"]
 
 # Update packages and install software
 RUN apt-get update \
