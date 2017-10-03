@@ -1,7 +1,10 @@
 #!/bin/bash
 cd "$(dirname "$0")"
 
-rm docker-compose.yml
+if [ -f docker-compose.yml ]; then
+    rm docker-compose.yml
+fi
+
 cat > ./docker-compose.yml << EOF
 version: '2'
 services:
