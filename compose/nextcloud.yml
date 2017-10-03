@@ -9,4 +9,4 @@ services:
       - TZ=${TIMEZONE}
     volumes:
       - ${DOCKER_HOME}/nextcloud/data:/data
-      - ${DOCKER_HOME}/nextcloud/config:/config/www/nextcloud
+      - ${DOCKER_HOME}/nextcloud/config:/config
