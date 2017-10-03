@@ -1,14 +1,12 @@
 version: '2'
 services:
-  jackett:
-    container_name: jackett
-    image: linuxserver/jackett
+  cardigann:
+    container_name: cardigann
+    image: linuxserver/cardigann
     network_mode: service:openvpn
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - ${DOCKER_HOME}/jackett/config:/config
-      - ${DOCKER_HOME}/jackett/downloads:/downloads
-      - ${DOCKER_HOME}/plex/media/TV Shows:/tv
+      - ${DOCKER_HOME}/cardigann/config:/config
     environment:
       - PGID=${PGID}
       - PUID=${PUID}
