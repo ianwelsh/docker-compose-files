@@ -1,0 +1,21 @@
+version: '2'
+services:
+  healthchecks:
+    container_name: healthchecks
+    image: healthchecks
+    ports:
+      - 8025:8000
+    volumes:
+      - ${DOCKER_HOME}/healthchecks:/config
+    environment:
+      - PGID=${PGID}
+      - PUID=${PUID}
+      - TZ=${TIMEZONE}
+      - SITE_ROOT=/
+      - SITE_NAME=Cronitor
+      - DEFAULT_FROM_EMAIL=norelpy@wootables.com
+      - EMAIL_HOST=${SMTP_HOST}
+      - EMAIL_PORT=${SMTP_PORT}
+      - EMAIL_HOST_USER=${SMTP_USER}
+      - EMAIL_HOST_PASSWORD=${SMTP_PASSWORD}
+      - EMAIL_USE_TLS=True
