@@ -3,8 +3,6 @@ services:
   healthchecks:
     container_name: healthchecks
     image: healthchecks
-    ports:
-      - 8025:8000
     volumes:
       - ${DOCKER_HOME}/healthchecks:/config
     environment:
